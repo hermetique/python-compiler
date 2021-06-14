@@ -20,6 +20,3 @@ path = "src/bin.rs"
 num-traits = "0.2.14"
 num-bigint = "0.2.6"
 python-parser = "0.1.0"
-
-[dev-dependencies]
-rusty-hook = {git = "https://github.com/swellaby/rusty-hook"}

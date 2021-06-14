@@ -1,3 +1,5 @@
+//! A buffer used in code generation.
+
 #![allow(unused)]
 /// An ultra-simple buffer that maintains indentation in code. That's it.
 pub struct Buffer {

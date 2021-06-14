@@ -4,11 +4,15 @@
 use super::buffer::Buffer;
 use crate::ast::{Instruction, VarType};
 
+/// All code generators (targets) implement this trait. 
 pub trait Generator {
+    /// Create a new instance of a Generator.
     fn new() -> Self;
+    /// Generate code from an IR `Program` (see AST module.)
     fn generate(&mut self, p: crate::ast::Program) -> String;
 }
 
+/// The C target.
 pub struct CTarget {
     module: Module,
 }
@@ -44,7 +48,9 @@ impl Generator for CTarget {
     }
 }
 
-struct Module {
+/// An internal module used by the C target. 
+/// TODO: Make this a trait.
+pub struct Module {
     buffer: Buffer,
 }
 
@@ -73,6 +79,12 @@ impl Module {
 
         self.buffer.write(&r);
         r
+    }
+}
+
+impl ToString for Module {
+    fn to_string(&self) -> String {
+        self.buffer.to_string()
     }
 }
 
@@ -136,5 +148,20 @@ mod tests {
             module.buffer.to_string(),
             "uint32_t foo = 100;\nuint32_t bar;"
         )
+    }
+
+    #[test]
+    fn test_generator_var_dec() {
+        use crate::ast::*;
+
+        let input = Instruction::VarDec{
+            name: String::from("test"),
+            data: VarType::Int(num_bigint::BigUint::from(10 as u64))
+        };
+
+        let mut generator = CTarget::new();
+        let output = generator.generate(Program::new(vec![input]));
+
+        assert_eq!(output, "uint32_t test = 10;");
     }
 }
