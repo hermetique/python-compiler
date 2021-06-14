@@ -1,7 +1,7 @@
 extern crate python;
-use std::env;
 use python::codegen;
 use python::codegen::Generator;
+use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -19,5 +19,8 @@ fn main() {
 
     println!("Compiling file");
     let mut generator = codegen::CTarget::new();
-    println!("Compiled file: \n{}", generator.generate(python::ast::Program::from(p)));
+    println!(
+        "Compiled file: \n{}",
+        generator.generate(python::ast::Program::from(p))
+    );
 }

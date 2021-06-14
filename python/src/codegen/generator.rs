@@ -1,4 +1,6 @@
 #![allow(unused)]
+#![allow(clippy::let_and_return, clippy::single_match)]
+
 use super::buffer::Buffer;
 use crate::ast::{Instruction, VarType};
 
@@ -16,7 +18,7 @@ impl Generator for CTarget {
         let mut r = Self {
             module: Module::default(),
         };
-        
+
         r
     }
 

@@ -1,4 +1,5 @@
-#![allow(unused)]
+#![allow(unused, clippy::single_match)]
+
 use num_bigint::BigUint;
 use python_parser::ast::*;
 

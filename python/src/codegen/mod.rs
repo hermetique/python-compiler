@@ -1,4 +1,4 @@
 pub(crate) mod buffer;
 
-pub mod codegen;
-pub use codegen::*;
+pub mod generator;
+pub use generator::*;
