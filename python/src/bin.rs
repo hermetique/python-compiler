@@ -18,7 +18,7 @@ fn main() {
     let p = python::ast::parse_str(content.unwrap().as_str());
 
     println!("Compiling file");
-    let mut generator = codegen::CTarget::new();
+    let mut generator = codegen::JSTarget::new();
     println!(
         "Compiled file: \n{}",
         generator.generate(python::ast::Program::from(p))
