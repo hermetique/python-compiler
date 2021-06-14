@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CTarget","The C target."],["Module","An internal module used by the C target.  TODO: Make this a trait."]],"trait":[["Generator","All code generators (targets) implement this trait. "]]});
