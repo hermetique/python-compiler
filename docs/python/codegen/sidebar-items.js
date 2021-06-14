@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["buffer","A buffer used in code generation."],["generator",""]]});

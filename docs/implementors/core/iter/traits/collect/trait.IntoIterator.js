@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["python"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html\" title=\"trait core::iter::traits::collect::IntoIterator\">IntoIterator</a> for <a class=\"struct\" href=\"python/ast/struct.Program.html\" title=\"struct python::ast::Program\">Program</a>","synthetic":false,"types":["python::ast::Program"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

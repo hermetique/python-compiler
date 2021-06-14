@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Buffer","An ultra-simple buffer that maintains indentation in code. That’s it."]]});

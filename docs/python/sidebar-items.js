@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["ast","Functionality for modifying and constructing parse trees and IR."],["codegen","Functionality related to code generation."]]});
