@@ -22,4 +22,4 @@ num-bigint = "0.2.6"
 python-parser = "0.1.0"
 
 [dev-dependencies]
-rusty-hook = "0.11.2"
+rusty-hook = {git = "https://github.com/swellaby/rusty-hook"}
