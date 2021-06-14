@@ -70,12 +70,8 @@ impl Generator for JSTarget {
                     let mut g = Self::new();
                     g.generate(body);
 
-                    self.module.declare_func(
-                        &name,
-                        &parameters,
-                        &g.module.to_string(),
-                        is_async
-                    );
+                    self.module
+                        .declare_func(&name, &parameters, &g.module.to_string(), is_async);
                 }
 
                 _ => {}
