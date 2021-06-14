@@ -173,7 +173,7 @@ mod tests {
         module.declare_func("main", "", "printf('hello, world');", false);
         assert_eq!(
             module.buffer.to_string(),
-            "function main() {\n    printf('hello, world');\n}"
+            " function main() {\n    printf('hello, world');\n}"
         );
     }
 
@@ -192,7 +192,7 @@ mod tests {
 
         let input = Instruction::VarDec {
             name: String::from("test"),
-            data: VarType::Int(num_bigint::BigUint::from(10 as u64)),
+            data: VarType::Int(num_bigint::BigUint::from(10_u64)),
         };
 
         let mut generator = JSTarget::new();
