@@ -1,0 +1,22 @@
+[package]
+name = "python-compiler"
+version = "0.1.0"
+authors = ["Gideon Grinberg <grinberg1165@gmail.com>"]
+edition = "2018"
+description = "python-compiler mandatory description"
+repository = "https://github.com/gideongrinberg/python-compiler"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "python"
+path = "src/lib.rs"
+
+[[bin]]
+name = "python"
+path = "src/bin.rs"
+
+
+[dependencies]
+num-traits = "0.2.14"
+num-bigint = "0.2.6"
+python-parser = "0.1.0"

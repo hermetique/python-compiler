@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "./python",
+    "./python-macros",
+]
