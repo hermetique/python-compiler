@@ -55,8 +55,8 @@ impl Module {
     }
 
     fn end_block(&mut self, end: &str) {
-        self.buffer.write(end);
         self.buffer.dedent();
+        self.buffer.write(end);
     }
 
     fn declare_func(&mut self, t: &str, name: &str, args: &str) -> String {
@@ -81,5 +81,60 @@ impl Default for Module {
         Self {
             buffer: Buffer::default(),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_module_default() {
+        let module = Module::default();
+        assert!(module.buffer == Buffer::default());
+    }
+
+    #[test]
+    fn test_buffer_blocks() {
+        let mut module = Module::default();
+
+        module.start_block("test {");
+        module.buffer.write("test");
+        module.end_block("}");
+
+        assert_eq!(module.buffer.to_string(), "test {\n    test\n}")
+    }
+
+    #[test]
+    fn test_declare_func() {
+        let mut module = Module::default();
+
+        module.declare_func("void", "main", "void");
+        assert_eq!(module.buffer.to_string(), "void main(void) {");
+
+        module.buffer.write("printf('hello, world');");
+        assert_eq!(
+            module.buffer.to_string(),
+            "void main(void) {\n    printf('hello, world');"
+        );
+
+        module.end_block("}");
+        assert_eq!(
+            module.buffer.to_string(),
+            "void main(void) {\n    printf('hello, world');\n}"
+        );
+    }
+
+    #[test]
+    fn test_declare_var() {
+        let mut module = Module::default();
+
+        module.declare_var("uint32_t", "foo", Some("100"));
+        module.declare_var("uint32_t", "bar", None);
+
+        assert_eq!(
+            module.buffer.to_string(),
+            "uint32_t foo = 100;\nuint32_t bar;"
+        )
     }
 }
