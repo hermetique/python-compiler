@@ -5,7 +5,7 @@ use super::buffer::Buffer;
 use crate::ast::{Instruction, VarType};
 use std::collections::HashMap;
 
-/// All code generators (targets) implement this trait. 
+/// All code generators (targets) implement this trait.
 pub trait Generator {
     /// Create a new instance of a Generator.
     fn new() -> Self;
@@ -57,7 +57,7 @@ impl Generator for JSTarget {
     }
 }
 
-/// An internal module used by the C target. 
+/// An internal module used by the C target.
 /// TODO: Make this a trait.
 pub struct Module {
     buffer: Buffer,
@@ -154,19 +154,16 @@ mod tests {
 
         module.declare_var("foo", "100");
 
-        assert_eq!(
-            module.buffer.to_string(),
-            "let foo = 100;"
-        )
+        assert_eq!(module.buffer.to_string(), "let foo = 100;")
     }
 
     #[test]
     fn test_generator_var_dec() {
         use crate::ast::*;
 
-        let input = Instruction::VarDec{
+        let input = Instruction::VarDec {
             name: String::from("test"),
-            data: VarType::Int(num_bigint::BigUint::from(10 as u64))
+            data: VarType::Int(num_bigint::BigUint::from(10 as u64)),
         };
 
         let mut generator = JSTarget::new();

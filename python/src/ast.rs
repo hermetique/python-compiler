@@ -25,8 +25,14 @@ pub enum VarType {
 pub enum Instruction {
     /// A variable declaration. `name` is the name of the variable
     /// and `data` is the value, which is a `VarType`.
-    VarDec { name: String, data: VarType },
-    FuncCall { name: String, args: Vec<String> },
+    VarDec {
+        name: String,
+        data: VarType,
+    },
+    FuncCall {
+        name: String,
+        args: Vec<String>,
+    },
 }
 
 /// An IR program.
