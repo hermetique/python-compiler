@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["python"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html\" title=\"trait core::cmp::Eq\">Eq</a> for <a class=\"struct\" href=\"python/codegen/buffer/struct.Buffer.html\" title=\"struct python::codegen::buffer::Buffer\">Buffer</a>","synthetic":false,"types":["python::codegen::buffer::Buffer"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
