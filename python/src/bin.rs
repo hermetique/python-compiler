@@ -16,6 +16,7 @@ fn main() {
 
     println!("Parsing file");
     let p = python::ast::parse_str(content.unwrap().as_str());
+    println!("{:#?}", p);
 
     println!("Compiling file");
     let mut generator = codegen::JSTarget::new();

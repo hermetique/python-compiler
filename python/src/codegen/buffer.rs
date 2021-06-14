@@ -56,11 +56,9 @@ impl Buffer {
 
     /// Unindent the buffer.
     pub fn dedent(&mut self) {
-        self.level -= 1;
-    }
-
-    pub fn dedent_level(&mut self, level: usize) {
-        self.level -= level;
+        if self.level > 0 {
+            self.level -= 1;
+        }
     }
 }
 

@@ -44,9 +44,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Todos
 
-- [ ] Helpful error messages.
 - [ ] **100% of Python supported** (this is the big one)
+- [ ] Better test coverage (and fuzzing)
 - [ ] Better optimization, less "fragile" code
+- [ ] Helpful error messages.
+- [ ] JS Interop
+
 
 ## License
 

@@ -5,12 +5,23 @@ use super::buffer::Buffer;
 use crate::ast::{Instruction, VarType};
 use std::collections::HashMap;
 
+macro_rules! ternary {
+    ($condition:expr, $true:expr, $false:expr) => {
+        if $condition {
+            return $true;
+        } else {
+            return $false;
+        }
+    };
+}
+
 /// All code generators (targets) implement this trait.
 pub trait Generator {
     /// Create a new instance of a Generator.
     fn new() -> Self;
     /// Generate code from an IR `Program` (see AST module.)
     fn generate(&mut self, p: crate::ast::Program) -> String;
+    /// Map of python builtin functions to target builtin functions.
     fn function_map() -> HashMap<String, String>;
 }
 
@@ -50,6 +61,23 @@ impl Generator for JSTarget {
                     self.module.call_func(&name, &args.join(", "));
                 }
 
+                Instruction::FuncDef {
+                    is_async,
+                    name,
+                    parameters,
+                    body,
+                } => {
+                    let mut g = Self::new();
+                    g.generate(body);
+
+                    self.module.declare_func(
+                        &name,
+                        &parameters,
+                        &g.module.to_string(),
+                        is_async
+                    );
+                }
+
                 _ => {}
             }
         }
@@ -74,9 +102,23 @@ impl Module {
         self.buffer.write(end);
     }
 
-    fn declare_func(&mut self, name: &str, args: &str) {
-        let r = format!("function {}({}) {{", name, args);
-        self.start_block(&r);
+    fn declare_func(&mut self, name: &str, args: &str, body: &str, is_async: bool) {
+        let prepend: &str;
+
+        if is_async {
+            prepend = "async";
+        } else {
+            prepend = "";
+        }
+
+        self.buffer
+            .write(&format!("{} function {}({}) {{", prepend, name, args));
+
+        self.buffer.indent();
+        self.buffer.write(body);
+        self.buffer.dedent();
+
+        self.buffer.write("}");
     }
 
     fn declare_var(&mut self, name: &str, v: &str) {
@@ -132,16 +174,7 @@ mod tests {
     fn test_declare_func() {
         let mut module = Module::default();
 
-        module.declare_func("main", "");
-        assert_eq!(module.buffer.to_string(), "function main() {");
-
-        module.buffer.write("printf('hello, world');");
-        assert_eq!(
-            module.buffer.to_string(),
-            "function main() {\n    printf('hello, world');"
-        );
-
-        module.end_block("}");
+        module.declare_func("main", "", "printf('hello, world');", false);
         assert_eq!(
             module.buffer.to_string(),
             "function main() {\n    printf('hello, world');\n}"

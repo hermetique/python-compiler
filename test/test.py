@@ -1,1 +1,2 @@
-print("Hello, World")
+async def func():
+    print("Hello, World")

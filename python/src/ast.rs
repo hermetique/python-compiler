@@ -29,6 +29,14 @@ pub enum Instruction {
         name: String,
         data: VarType,
     },
+
+    FuncDef {
+        is_async: bool,
+        name: String,
+        parameters: String,
+        body: Program,
+    },
+
     FuncCall {
         name: String,
         args: Vec<String>,
@@ -51,11 +59,23 @@ impl From<Tree> for Program {
     fn from(t: Tree) -> Program {
         let mut instrs: Vec<Instruction> = vec![];
 
+        // Generate IR for each statement.
         for statement in t {
             match statement {
+                // For some reason, both function calls and variable declarations are assignments.
                 Statement::Assignment(t, v) => match &t[0] {
                     Expression::Call(b, a) => instrs.push(handle_call(b.deref(), a.to_vec())),
                     Expression::Name(_) => instrs.push(handle_assignment(t, v)),
+                    _ => {}
+                },
+
+                Statement::Compound(s) => match s.deref() {
+                    CompoundStatement::Funcdef(f) => instrs.push(Instruction::FuncDef {
+                        is_async: f.r#async,
+                        name: f.name.clone(),
+                        parameters: process_parameters(&f.parameters),
+                        body: Program::from(f.code.to_vec()), // Function body should be handled recursively.
+                    }),
                     _ => {}
                 },
                 _ => {}
@@ -128,4 +148,8 @@ pub fn handle_call(name: &Expression, args: Vec<Argument>) -> Instruction {
         name: String::from(name),
         args: func_args,
     }
+}
+
+fn process_parameters(params: &TypedArgsList) -> String {
+    "".to_string()
 }
