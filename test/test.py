@@ -1,2 +1,3 @@
+a = 1
 async def func():
-    print("Hello, World")
+    print(a)

@@ -5,8 +5,7 @@ A Python compiler targeting JavaScript, implemented in Rust.
 [![Crates.io](https://img.shields.io/crates/v/python-compiler.svg)](https://crates.io/crates/python-compiler)
 [![Docs.rs](https://docs.rs/python-compiler/badge.svg)](https://docs.rs/python-compiler)
 [![CI](https://github.com/gideongrinberg/python-compiler/workflows/Continuous%20Integration/badge.svg)](https://github.com/gideongrinberg/python-compiler/actions)
-[![Coverage Status](https://coveralls.io/repos/github/gideongrinberg/python-compiler/badge.svg?branch=main)](https://coveralls.io/github/gideongrinberg/python-compiler?branch=main) ![Rust Template](https://img.shields.io/badge/Generated%20Using-Rust%20Github%20Template-blue?style=flat-square)
-
+[![Coverage Status](https://coveralls.io/repos/github/gideongrinberg/python-compiler/badge.svg)](https://coveralls.io/github/gideongrinberg/python-compiler)
 
 ## Installation
 

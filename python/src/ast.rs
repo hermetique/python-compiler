@@ -130,6 +130,20 @@ pub fn handle_call(name: &Expression, args: Vec<Argument>) -> Instruction {
     for arg in args {
         match arg {
             Argument::Positional(e) => match e {
+                Expression::None => func_args.push(String::from("null")),
+                Expression::False => func_args.push(String::from("false")),
+                Expression::True => func_args.push(String::from("true")),
+                Expression::Name(n) => func_args.push(n),
+                Expression::Int(i) | Expression::ImaginaryInt(i) => {
+                    func_args.push(i.to_str_radix(10))
+                },
+                
+                Expression::Float(f) | Expression::ImaginaryFloat(f) => {
+                    func_args.push(f.to_string())
+                },
+
+
+                // TODO: handle bytes.
                 Expression::String(p) => {
                     for string in &p {
                         func_args.push(format!(
@@ -138,6 +152,7 @@ pub fn handle_call(name: &Expression, args: Vec<Argument>) -> Instruction {
                         ));
                     }
                 }
+
                 _ => {}
             },
             _ => {}
