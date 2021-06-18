@@ -1,5 +1,7 @@
 # Python Compiler
 
+> ⚠️ **THIS IS NOT PRODUCTION READY AT ALL, DO NOT USE IT**. I'm also currently rewriting it, so this is not the most up-to-date version.
+
 A Python compiler targeting JavaScript, implemented in Rust.
 
 [![Crates.io](https://img.shields.io/crates/v/python-compiler.svg)](https://crates.io/crates/python-compiler)
